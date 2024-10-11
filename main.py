@@ -8,7 +8,7 @@ from FlyLib3.vision.apriltag import ApriltagDetector, ApriltagDetectionResult
 from FlyLib3.math.pid import PID
 
 drone = Tello()
-capture = cv2.VideoCapture(0)
+# capture = cv2.VideoCapture(0)
 apriltag_detector = ApriltagDetector()
 last_detected_apriltag = None
 current_detected_apriltag = None
@@ -36,9 +36,10 @@ def loop():
     global current_detected_apriltag
 
     while True:
-        ret, frame = capture.read()
+        # ret, frame = capture.read()
+        frame = drone.get_frame_read().frame
 
-        if not ret:
+        if not frame:
             continue
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
